@@ -1,0 +1,66 @@
+package com.tristan.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name="companies", uniqueConstraints = {@UniqueConstraint(columnNames = {"company_name"})})
+public class Company {
+	
+	@Column(name="company_id")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
+	@Column(name="company_name", nullable=false)
+	private String name;
+	
+	@Column(name="email"       , nullable = false)
+	private String email;
+	
+	@JoinColumn(name="place_id", nullable = true)
+	@ManyToOne
+	private Place place;
+	
+	public Company() {}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setCompany_name(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+	
+}
